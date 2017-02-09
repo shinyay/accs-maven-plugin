@@ -1,0 +1,1 @@
+{"runtime":{"majorVersion":"8"},"command":"java -jar jersey-service-1.0-SNAPSHOT.jar","startupTime":"300","shutdownTime":"0","release":{"build":"170401.090424","commit":"0451d91e717a86a2b99f3f5226ed08851235f093","version":"1.0-SNAPSHOT"},"notes":"","mode":"rolling","isClustered":"false"}
