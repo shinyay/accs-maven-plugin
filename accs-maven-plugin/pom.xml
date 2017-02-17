@@ -74,16 +74,19 @@
                     <user>shinyay</user>
                     <password>yanaYANA0928</password>
                     <storage>_apaas</storage>
-                    <appName>ACCS-Sample2</appName>
+                    <appName>ACCS-Sample</appName>
                     <runtime>java</runtime>
                     <subscription>Hourly</subscription>
-                    <archiveURL>_apaas/jersey-service-${project.version}.zip</archiveURL>
+<!--                    <archiveURL>APAAS/jersey-service-${project.version}.zip</archiveURL>-->
+                    <archiveURL>APAAS/jersey-service.zip</archiveURL>
                     <metaJsonPath>${project.basedir}\metafiles</metaJsonPath>
-                    <archiveName>jersey-service-${project.version}</archiveName>
+<!--                    <archiveName>jersey-service-${project.version}</archiveName>-->
+                    <archiveName>jersey-service</archiveName>
                     <majorVersion>8</majorVersion>
-                    <command>java -jar jersey-service-${project.version}.jar</command>
+<!--                    <command>java -jar jersey-service-${project.version}.jar</command>-->
+                    <command>java -jar jersey-service-1.0-SNAPSHOT-jar-with-dependencies.jar</command>
                     <version>${project.version}</version>
-                    <memory>2G</memory>
+                    <memory>1G</memory>
                     <instances>1</instances>
                 </configuration>
             </plugin>
@@ -138,8 +141,8 @@
                     <identitydomain>shinyayjan</identitydomain>
                     <user>shinyay</user>
                     <password>yanaYANA0928</password>
-                    <storage>_apaas</storage>
-                    <object>jersey-service-1.0-SNAPSHOT.zip</object>
+                    <storage>APAAS</storage>
+                    <object>jersey-service.zip</object>
                 </configuration>
             </plugin>
         </plugins>

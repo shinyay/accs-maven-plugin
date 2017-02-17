@@ -149,12 +149,13 @@ public class ACCSFunction {
     public static String createApplication(ACCSInfo accsInfo) throws IOException {
         String region = accsInfo.getRegion().equals("us") ? ACCSConstants.REST_API_DOMAIN_US : ACCSConstants.REST_API_DOMAIN_EMEA;
         String url = "https://" + region + ACCSConstants.REST_API_APAAS_PATH + "/" + accsInfo.getIdentityDomain();
-        BasicNameValuePair[] headers = new BasicNameValuePair[2];
+        BasicNameValuePair[] headers = new BasicNameValuePair[1];
         headers[0] = new BasicNameValuePair(ACCSConstants.HEADER_X_ID_TENANT_NAME, accsInfo.getIdentityDomain());
-        headers[1] = new BasicNameValuePair(ACCSConstants.HEADER_CONTENT_TYPE, ACCSConstants.HEADER_CONTENT_TYPE_VALUE);
+//      headers[1] = new BasicNameValuePair(ACCSConstants.HEADER_CONTENT_TYPE, ACCSConstants.HEADER_CONTENT_TYPE_VALUE);
 
         StringBody stringBodyName = new StringBody(accsInfo.getAppName(), ContentType.MULTIPART_FORM_DATA);
         StringBody stringBodyRuntime = new StringBody(accsInfo.getRuntime(), ContentType.MULTIPART_FORM_DATA);
+        StringBody stringBodySubscription = new StringBody(accsInfo.getSubscription(), ContentType.MULTIPART_FORM_DATA);
         FileBody fileBodyManifest = new FileBody(Paths.get(accsInfo.getMetaJsonPath(),
                 ACCSConstants.METAFILES_MANIFEST).toFile(), ContentType.APPLICATION_JSON);
         FileBody fileBodyDeployment = new FileBody(Paths.get(accsInfo.getMetaJsonPath(),
@@ -166,41 +167,21 @@ public class ACCSFunction {
                 .setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
                 .addPart("name", stringBodyName)
                 .addPart("runtime", stringBodyRuntime)
+                .addPart("subscription", stringBodySubscription)
                 .addPart("manifest", fileBodyManifest)
                 .addPart("deployment", fileBodyDeployment)
                 .addPart("archiveURL", stringBodyArchiveURL)
                 .build();
 
-/**
- ArrayList<NameValuePair> bodies = new ArrayList<NameValuePair>(5);
- bodies.add(new BasicNameValuePair("name", accsInfo.getAppName()));
- bodies.add(new BasicNameValuePair("runtime", accsInfo.getRuntime()));
- bodies.add(new BasicNameValuePair("manifest",
- Files.readAllLines(Paths.get(accsInfo.getMetaJsonPath(), "manifest.json"), StandardCharsets.UTF_8).stream().collect(Collectors.joining())));
- bodies.add(new BasicNameValuePair("deployment",
- Files.readAllLines(Paths.get(accsInfo.getMetaJsonPath(), "deployment.json"), StandardCharsets.UTF_8).stream().collect(Collectors.joining())));
- bodies.add(new BasicNameValuePair("archiveURL", accsInfo.getArchiveURL()));
- **/
-
-        /**
-         StringEntity body = new StringEntity(
-         "name=" + accsInfo.getAppName() + "&"
-         + "runtime=" + accsInfo.getRuntime() + "&"
-         + "subscription=" + accsInfo.getSubscription() + "&"
-         + "manifest="
-         + Files.readAllLines(Paths.get(accsInfo.getMetaJsonPath(), "manifest.json"), StandardCharsets.UTF_8).get(0) + "&"
-         + "deployment="
-         + Files.readAllLines(Paths.get(accsInfo.getMetaJsonPath(), "deployment.json"), StandardCharsets.UTF_8).get(0) + "&"
-         + "archiveURL=" + accsInfo.getArchiveURL()
-         );
-
-         accsInfo.getLog().debug("BODY: " + EntityUtils.toString(body));
-         **/
         Credentials credUser = new UsernamePasswordCredentials(accsInfo.getUsername(), accsInfo.getPassword());
 
         String result = null;
         try {
-//            result = PostMethod.HttpPostMethod(url, headers, new UrlEncodedFormEntity(bodies, StandardCharsets.UTF_8), credUser);
+            accsInfo.getLog().debug("URL: " + url);
+            Arrays.stream(headers).forEach(s -> accsInfo.getLog().debug(s.getName() + ": " + s.getValue()));
+            accsInfo.getLog().debug("Body: " + EntityUtils.toString(entity));
+            accsInfo.getLog().debug("UserPrincipal: " + credUser.getUserPrincipal().getName());
+            accsInfo.getLog().debug("Password: " + credUser.getPassword());
             result = PostMethod.HttpPostMethod(url, headers, entity, credUser);
         } catch (Exception e) {
             accsInfo.getLog().error(e);

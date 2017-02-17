@@ -17,8 +17,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Optional;
 
-@Mojo(name = "sample", threadSafe = true, defaultPhase = LifecyclePhase.INSTALL)
-public class SampleMojo extends AbstractMojo {
+@Mojo(name = "package", threadSafe = true, defaultPhase = LifecyclePhase.INSTALL)
+public class ACCSPackageMojo extends AbstractMojo {
 
     @Parameter(required = true)
     private String region;
@@ -96,8 +96,6 @@ public class SampleMojo extends AbstractMojo {
         createManifestJson();
         createDeploymentJson();
         zipPackage();
-        listApplications();
-        createApplication();
     }
 
     private void initializeACCSInfo() {
@@ -173,15 +171,6 @@ public class SampleMojo extends AbstractMojo {
         }
     }
 
-    private void listApplications() {
-        try {
-            String result = ACCSFunction.listApplications(accsInfo);
-            getLog().info(result);
-        } catch (Exception e) {
-            getLog().error(e);
-        }
-    }
-
     private String getGitHash() {
         try {
             return new BufferedReader(
@@ -192,15 +181,6 @@ public class SampleMojo extends AbstractMojo {
         } catch (IOException ioe) {
             getLog().error(ioe);
             return null;
-        }
-    }
-
-    private void createApplication() {
-        try {
-            String result = ACCSFunction.createApplication(accsInfo);
-            getLog().info(result);
-        } catch (Exception e) {
-            getLog().error(e);
         }
     }
 }

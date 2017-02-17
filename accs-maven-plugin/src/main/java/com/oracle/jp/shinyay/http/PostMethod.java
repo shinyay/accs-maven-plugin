@@ -13,6 +13,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -40,9 +41,6 @@ public class PostMethod {
 
         RequestConfig requestConfig = RequestConfig.custom().build();
 
-        Arrays.stream(httpPost.getAllHeaders()).forEach(System.out::println);
-        System.out.println(EntityUtils.toString(httpPost.getEntity()));
-
         try (
                 CloseableHttpClient httpClient = HttpClientBuilder.create()
                         .setDefaultCredentialsProvider(credentialsProvider)
@@ -59,6 +57,7 @@ public class PostMethod {
                 httpResult = httpResponse.getStatusLine() + ACCSConstants.LINE_SEPARATOR;
             }
         }
-        return httpResult.toString();
+
+        return httpResult;
     }
 }

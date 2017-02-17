@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @Mojo(name = "sample", threadSafe = true, defaultPhase = LifecyclePhase.INSTALL)
-public class SampleMojo extends AbstractMojo {
+public class ACCSListMojo extends AbstractMojo {
 
     @Parameter(required = true)
     private String region;
@@ -93,11 +93,7 @@ public class SampleMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         initializeACCSInfo();
-        createManifestJson();
-        createDeploymentJson();
-        zipPackage();
         listApplications();
-        createApplication();
     }
 
     private void initializeACCSInfo() {
@@ -146,33 +142,6 @@ public class SampleMojo extends AbstractMojo {
         getLog().debug("IS-CLUSTER: " + accsInfo.getIsClustered());
     }
 
-    private void createManifestJson() {
-        try {
-            String result = ACCSFunction.createManifestJsonForJava(accsInfo);
-            getLog().info("MANIFEST-JSON: " + result);
-        } catch (Exception e) {
-            getLog().error(e);
-        }
-    }
-
-    private void createDeploymentJson() {
-        try {
-            String result = ACCSFunction.createDeploymentJson(accsInfo);
-            getLog().info("DEPLOYMENT-JSON: " + result);
-        } catch (Exception e) {
-            getLog().error(e);
-        }
-    }
-
-    private void zipPackage() {
-        try {
-            String result = ACCSFunction.zipPackage(accsInfo);
-            getLog().info(result);
-        } catch (Exception e) {
-            getLog().error(e);
-        }
-    }
-
     private void listApplications() {
         try {
             String result = ACCSFunction.listApplications(accsInfo);
@@ -192,15 +161,6 @@ public class SampleMojo extends AbstractMojo {
         } catch (IOException ioe) {
             getLog().error(ioe);
             return null;
-        }
-    }
-
-    private void createApplication() {
-        try {
-            String result = ACCSFunction.createApplication(accsInfo);
-            getLog().info(result);
-        } catch (Exception e) {
-            getLog().error(e);
         }
     }
 }

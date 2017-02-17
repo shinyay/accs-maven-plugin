@@ -55,6 +55,6 @@ public class GetMethod {
                 httpResult = httpResponse.getStatusLine() + ACCSConstants.LINE_SEPARATOR;
             }
         }
-        return httpResult.toString();
+        return httpResult;
     }
 }
