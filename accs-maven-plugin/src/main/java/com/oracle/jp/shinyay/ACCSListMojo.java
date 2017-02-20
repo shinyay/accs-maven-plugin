@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Optional;
 
-@Mojo(name = "sample", threadSafe = true, defaultPhase = LifecyclePhase.INSTALL)
+@Mojo(name = "list", threadSafe = true, defaultPhase = LifecyclePhase.INSTALL)
 public class ACCSListMojo extends AbstractMojo {
 
     @Parameter(required = true)
