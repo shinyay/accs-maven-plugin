@@ -44,7 +44,7 @@ public class ACCSListMojo extends AbstractMojo {
     private String outputPath;
     @Parameter(defaultValue = "${basedir}")
     private String metaJsonPath;
-    @Parameter(defaultValue = "${project.artifactId}-${project.version}", readonly = true)
+    @Parameter(defaultValue = "${project.artifactId}-${project.version}")
     private String archiveName;
 
     @Parameter(required = true)
