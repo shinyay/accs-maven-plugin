@@ -4,7 +4,7 @@
 
     <groupId>com.oracle.jp.shinyay</groupId>
     <artifactId>accs-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-0</version>
     <packaging>maven-plugin</packaging>
 
     <properties>
@@ -65,33 +65,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.oracle.jp.shinyay</groupId>
-                <artifactId>accs-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <configuration>
-                    <region>emea</region>
-                    <identitydomain>shinyayjan</identitydomain>>
-                    <user>shinyay</user>
-                    <password>yanaYANA0928</password>
-                    <storage>_apaas</storage>
-                    <appName>ACCS-Sample</appName>
-                    <runtime>java</runtime>
-                    <subscription>Hourly</subscription>
-<!--                    <archiveURL>APAAS/jersey-service-${project.version}.zip</archiveURL>-->
-                    <archiveURL>APAAS/jersey-service.zip</archiveURL>
-                    <metaJsonPath>${project.basedir}\metafiles</metaJsonPath>
-<!--                    <archiveName>jersey-service-${project.version}</archiveName>-->
-                    <archiveName>jersey-service</archiveName>
-                    <majorVersion>8</majorVersion>
-<!--                    <command>java -jar jersey-service-${project.version}.jar</command>-->
-                    <command>java -jar jersey-service-1.0-SNAPSHOT-jar-with-dependencies.jar</command>
-                    <version>${project.version}</version>
-                    <memory>1G</memory>
-                    <instances>1</instances>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.0</version>
@@ -132,18 +105,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.oracle.jp.shinyay</groupId>
-                <artifactId>scs-maven-plugin</artifactId>
-                <version>1.0</version>
-                <configuration>
-                    <identitydomain>shinyayjan</identitydomain>
-                    <user>shinyay</user>
-                    <password>yanaYANA0928</password>
-                    <storage>APAAS</storage>
-                    <object>jersey-service.zip</object>
-                </configuration>
             </plugin>
         </plugins>
     </build>
