@@ -12,6 +12,10 @@ ACCS has REST API as well as Brower GUI. This maven plugin enables you to use RE
 
 ## Demo
 
+![](docs/images/accs-maven-plugin.gif)
+
+This demo shows build flow from compile to deploy an application for ACCS.
+
 ## Features
 
 This plugin has the following feature:
@@ -33,7 +37,7 @@ This plugin has the following feature:
 
 - command: `accs:create`
 
-Configure ACCS instance information under configuration element in pom.xmliguration>
+Configure ACCS instance information under configuration element in pom.xmliguration
 
 ```xml
 <configuration>
@@ -99,7 +103,7 @@ Configure applicatiton metainfo under configuration element in pom.xml
 </configuration>
 ```
 
-- **metaJsonPath**: Output path for deployment.json
+- **metaJsonPath**: Output path for manifest.json
 - **archiveName**: Application archive name without extension
   - Archive is gerated as `zip` format
 - **majorVersion**: Runtime version
